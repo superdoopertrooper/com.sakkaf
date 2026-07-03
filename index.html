@@ -3,9 +3,14 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Coming Soon</title>
+    <title>SAKKAF | Coffee &amp; Tea</title>
+    <meta
+      name="description"
+      content="SAKKAF is a traditional coffee and tea company offering single origin coffees and traditional coffee and tea blends from the Middle East, North Africa, and Africa."
+    />
+    <meta name="theme-color" content="#f7f4ef" />
     <style>
-      @import url("https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Marcellus&display=swap");
+      @import url("https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&display=swap");
 
       *,
       *::before,
@@ -15,76 +20,25 @@
         padding: 0;
       }
 
+      :root {
+        --cream: #f7f4ef;
+        --coffee: #2d2926;
+        --taupe: #8e8b82;
+        --text: #5c5650;
+      }
+
       body {
         min-height: 100vh;
         display: flex;
         align-items: center;
         justify-content: center;
-        font-family: "DM Sans", system-ui, -apple-system, BlinkMacSystemFont,
-          "Segoe UI", sans-serif;
-        background: #0a0a0f;
-        color: #f4f4f5;
+        font-family: "Playfair Display", Georgia, "Times New Roman", serif;
+        background: var(--cream);
+        color: var(--text);
         padding: 2rem;
-        overflow: hidden;
-      }
-
-      .map-bg {
-        position: fixed;
-        inset: -5%;
-        z-index: 0;
-        pointer-events: none;
-      }
-
-      .map-bg img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        object-position: center;
-        opacity: 0.14;
-        filter: brightness(0) saturate(100%) invert(52%) sepia(35%)
-          saturate(1200%) hue-rotate(210deg) brightness(95%);
-        animation: map-drift 90s ease-in-out infinite alternate;
-      }
-
-      .map-bg::before {
-        content: "";
-        position: absolute;
-        inset: 0;
-        background: radial-gradient(
-            ellipse at 20% 20%,
-            rgba(99, 102, 241, 0.18) 0%,
-            transparent 50%
-          ),
-          radial-gradient(
-            ellipse at 80% 80%,
-            rgba(168, 85, 247, 0.14) 0%,
-            transparent 50%
-          );
-      }
-
-      .map-bg::after {
-        content: "";
-        position: absolute;
-        inset: 0;
-        background: radial-gradient(
-          ellipse at center,
-          transparent 35%,
-          #0a0a0f 78%
-        );
-      }
-
-      @keyframes map-drift {
-        from {
-          transform: scale(1) translate(0, 0);
-        }
-        to {
-          transform: scale(1.04) translate(-1.5%, -1%);
-        }
       }
 
       main {
-        position: relative;
-        z-index: 1;
         text-align: center;
         max-width: 32rem;
       }
@@ -97,41 +51,131 @@
       }
 
       .logo-brand {
-        font-family: "Marcellus", Georgia, "Times New Roman", serif;
-        font-size: clamp(2.75rem, 8.5vw, 4.75rem);
-        font-weight: 400;
-        letter-spacing: 0.06em;
+        font-family: "Playfair Display", Georgia, "Times New Roman", serif;
+        font-size: clamp(3rem, 10vw, 5.5rem);
+        font-weight: 700;
+        letter-spacing: 0.04em;
         line-height: 0.95;
         text-transform: uppercase;
-        color: #f4f0e7;
-        text-shadow: 0 8px 28px rgba(2, 6, 23, 0.45);
+        color: var(--coffee);
       }
 
       .logo-sub {
-        margin-top: 0.35rem;
-        font-family: "DM Sans", system-ui, sans-serif;
-        font-size: clamp(0.95rem, 1.8vw, 1.25rem);
-        font-weight: 500;
-        letter-spacing: 0.42em;
+        margin-top: 0.5rem;
+        font-family: "Playfair Display", Georgia, "Times New Roman", serif;
+        font-size: clamp(0.85rem, 1.8vw, 1.15rem);
+        font-weight: 400;
+        letter-spacing: 0.38em;
         text-transform: uppercase;
-        color: #f4f0e7;
-        text-shadow: 0 6px 20px rgba(2, 6, 23, 0.35);
+        color: var(--taupe);
       }
 
       p {
         font-size: 1.0625rem;
         font-weight: 400;
-        line-height: 1.65;
+        line-height: 1.7;
         letter-spacing: 0.01em;
-        color: #b4b4bc;
+        color: var(--text);
+      }
+
+      .tagline {
+        font-size: 1.125rem;
+        color: var(--coffee);
+        margin-bottom: 0.75rem;
+      }
+
+      .products {
+        margin-top: 1.25rem;
+        font-size: 0.8125rem;
+        font-weight: 500;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: var(--taupe);
+      }
+
+      .signup {
+        margin-top: 2rem;
+      }
+
+      .signup-label {
+        display: block;
+        margin-bottom: 0.75rem;
+        font-size: 0.8125rem;
+        font-weight: 500;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: var(--taupe);
+      }
+
+      .signup-form {
+        display: flex;
+        flex-direction: column;
+        gap: 0.625rem;
+      }
+
+      @media (min-width: 28rem) {
+        .signup-form {
+          flex-direction: row;
+        }
+      }
+
+      .signup-form input {
+        flex: 1;
+        min-width: 0;
+        padding: 0.75rem 1rem;
+        font-family: inherit;
+        font-size: 0.9375rem;
+        color: var(--coffee);
+        background: rgba(255, 255, 255, 0.55);
+        border: 1px solid rgba(142, 139, 130, 0.45);
+        border-radius: 0;
+        outline: none;
+        transition: border-color 0.2s ease;
+      }
+
+      .signup-form input::placeholder {
+        color: var(--taupe);
+      }
+
+      .signup-form input:focus {
+        border-color: var(--coffee);
+      }
+
+      .signup-form button {
+        padding: 0.75rem 1.25rem;
+        font-family: inherit;
+        font-size: 0.8125rem;
+        font-weight: 500;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--cream);
+        background: var(--coffee);
+        border: 1px solid var(--coffee);
+        cursor: pointer;
+        transition: background 0.2s ease, color 0.2s ease;
+      }
+
+      .signup-form button:hover {
+        background: transparent;
+        color: var(--coffee);
+      }
+
+      .signup-note {
+        margin-top: 0.625rem;
+        font-size: 0.8125rem;
+        color: var(--taupe);
       }
 
       .divider {
         width: 3rem;
-        height: 2px;
-        background: linear-gradient(90deg, transparent, #6366f1, transparent);
+        height: 1px;
+        background: linear-gradient(
+          90deg,
+          transparent,
+          var(--taupe),
+          transparent
+        );
         margin: 2rem auto;
-        border-radius: 1px;
       }
 
       .social {
@@ -149,18 +193,17 @@
         width: 2.75rem;
         height: 2.75rem;
         border-radius: 9999px;
-        color: #c7d2fe;
-        background: rgba(99, 102, 241, 0.08);
-        border: 1px solid rgba(165, 180, 252, 0.2);
-        backdrop-filter: blur(8px);
+        color: var(--coffee);
+        background: rgba(45, 41, 38, 0.04);
+        border: 1px solid rgba(142, 139, 130, 0.35);
         transition: color 0.2s ease, background 0.2s ease,
           border-color 0.2s ease, transform 0.2s ease;
       }
 
       .social a:hover {
-        color: #f4f4f5;
-        background: rgba(99, 102, 241, 0.18);
-        border-color: rgba(165, 180, 252, 0.45);
+        color: var(--cream);
+        background: var(--coffee);
+        border-color: var(--coffee);
         transform: translateY(-2px);
       }
 
@@ -184,16 +227,40 @@
     </style>
   </head>
   <body>
-    <div class="map-bg" aria-hidden="true">
-      <img src="world-map.svg" alt="" />
-    </div>
     <main>
-      <div class="logo" aria-label="Sakkaf Coffee & Tea">
-        <div class="logo-brand">Sakkaf</div>
-        <div class="logo-sub">COFFEE &amp; TEA</div>
+      <div class="logo" aria-label="SAKKAF Coffee and Tea">
+        <div class="logo-brand">SAKKAF</div>
+        <div class="logo-sub">Coffee &amp; Tea</div>
       </div>
       <div class="divider" aria-hidden="true"></div>
-      <p>We're building something new. Check back soon.</p>
+      <p class="tagline">
+        A traditional coffee and tea company, rooted in craft and origin.
+      </p>
+      <p>
+        We source single origin coffees from around the world. Our coffee and
+        tea blends are traditional recipes from the Middle East, North Africa,
+        and Africa. Our online shop is opening soon.
+      </p>
+      <p class="products">
+        Single Origin Coffees · Coffee Blends · Tea Blends
+      </p>
+      <section class="signup" aria-labelledby="signup-heading">
+        <label class="signup-label" id="signup-heading" for="email">
+          Join the mailing list
+        </label>
+        <form class="signup-form" action="#" method="post">
+          <input
+            id="email"
+            name="email"
+            type="email"
+            placeholder="Your email address"
+            autocomplete="email"
+            required
+          />
+          <button type="submit">Notify me</button>
+        </form>
+        <p class="signup-note">Be first to know when our shop opens.</p>
+      </section>
       <nav class="social" aria-label="Social media">
         <a href="https://www.tiktok.com/@sakkaf.com" target="_blank" rel="noopener noreferrer">
           <span class="sr-only">TikTok</span>
