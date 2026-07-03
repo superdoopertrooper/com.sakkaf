@@ -166,6 +166,25 @@
         color: var(--taupe);
       }
 
+      .signup-feedback {
+        margin-top: 0.75rem;
+        font-size: 0.875rem;
+        min-height: 1.25rem;
+      }
+
+      .signup-feedback[data-state="success"] {
+        color: var(--coffee);
+      }
+
+      .signup-feedback[data-state="error"] {
+        color: #8b3a3a;
+      }
+
+      .signup-form button:disabled {
+        opacity: 0.6;
+        cursor: not-allowed;
+      }
+
       .divider {
         width: 3rem;
         height: 1px;
@@ -248,7 +267,7 @@
         <label class="signup-label" id="signup-heading" for="email">
           Join the mailing list
         </label>
-        <form class="signup-form" action="#" method="post">
+        <form class="signup-form" id="signup-form" action="/api/subscribe" method="post">
           <input
             id="email"
             name="email"
@@ -259,6 +278,7 @@
           />
           <button type="submit">Notify me</button>
         </form>
+        <p class="signup-feedback" id="signup-feedback" aria-live="polite"></p>
         <p class="signup-note">Be first to know when our shop opens.</p>
       </section>
       <nav class="social" aria-label="Social media">
@@ -308,5 +328,49 @@
         </a>
       </nav>
     </main>
+    <script>
+      (function () {
+        const form = document.getElementById("signup-form");
+        const feedback = document.getElementById("signup-feedback");
+        const submitButton = form.querySelector('button[type="submit"]');
+
+        form.addEventListener("submit", async function (event) {
+          event.preventDefault();
+          feedback.textContent = "";
+          feedback.removeAttribute("data-state");
+          submitButton.disabled = true;
+
+          const email = new FormData(form).get("email");
+
+          try {
+            const response = await fetch("/api/subscribe", {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({ email }),
+            });
+
+            const data = await response.json().catch(function () {
+              return {};
+            });
+
+            if (response.ok) {
+              feedback.setAttribute("data-state", "success");
+              feedback.textContent = "You're on the list. We'll be in touch soon.";
+              form.reset();
+            } else {
+              feedback.setAttribute("data-state", "error");
+              feedback.textContent =
+                data.error || "Something went wrong. Please try again.";
+            }
+          } catch (error) {
+            feedback.setAttribute("data-state", "error");
+            feedback.textContent =
+              "Something went wrong. Please try again.";
+          } finally {
+            submitButton.disabled = false;
+          }
+        });
+      })();
+    </script>
   </body>
 </html>

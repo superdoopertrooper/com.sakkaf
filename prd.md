@@ -32,11 +32,11 @@ SAKKAF is a traditional coffee and tea company. The brand sells carefully source
 
 ### Core offerings
 
-| Category               | Description                                                                 |
-| ---------------------- | --------------------------------------------------------------------------- |
-| Single origin coffees  | Coffees sourced from specific regions and growers **worldwide**             |
-| Coffee blends          | **Traditional** blends from the Middle East, North Africa, and Africa     |
-| Tea blends             | **Traditional** blends from the Middle East, North Africa, and Africa     |
+| Category               | Description                                                             |
+| ---------------------- | ----------------------------------------------------------------------- |
+| Single origin coffees  | Coffees sourced from specific regions and growers **worldwide**         |
+| Coffee blends          | **Traditional** blends from the Middle East, North Africa, and Africa |
+| Tea blends             | **Traditional** blends from the Middle East, North Africa, and Africa |
 
 ### Examples
 
@@ -50,17 +50,40 @@ SAKKAF is a traditional coffee and tea company. The brand sells carefully source
 - Describe coffee and tea blends as traditional recipes from the Middle East, North Africa, and Africa.
 - Do not frame the entire company as Middle Eastern or North African.
 
+## Infrastructure
+
+| Service  | Details                                                                 |
+| -------- | ----------------------------------------------------------------------- |
+| Domain   | [www.sakkaf.com](https://www.sakkaf.com)                                |
+| Hosting  | Vercel (`com.sakkaf`)                                                   |
+| GitHub   | [superdoopertrooper/com.sakkaf](https://github.com/superdoopertrooper/com.sakkaf) |
+| Database | Supabase (`hklvpjnfusupxtnltrds`)                                     |
+
+### Repository layout
+
+```
+index.html              # Coming-soon landing page
+api/subscribe.js        # Mailing list signup (Vercel serverless)
+supabase/migrations/    # Database migrations
+package.json            # @supabase/supabase-js dependency
+.env.example            # Local env template (copy to .env)
+```
+
 ## Site — current (v0)
 
-Static coming-soon landing page (`index.html`), deployed via Vercel.
+Static coming-soon landing page deployed to **www.sakkaf.com**.
 
 ### Shipped
 
-- [x] Brand logo and tagline
-- [x] Product category summary
-- [x] Mailing list signup UI
+- [x] Brand logo, tagline, and Playfair Display styling
+- [x] Product category summary and site copy
 - [x] Social links (TikTok, Instagram, YouTube, Facebook)
-- [x] Brand colors and Playfair Display typography
+- [x] Mailing list signup form with success/error feedback
+- [x] `/api/subscribe` Vercel serverless function
+- [x] Supabase `mailing_list_subscribers` table (RLS enabled)
+- [x] Vercel env vars (`SUPABASE_URL`, `SUPABASE_SERVICE_ROLE_KEY`)
+- [x] GitHub repo connected to Vercel for deploys
+- [x] Supabase MCP configured in `.cursor/mcp.json`
 
 ### Site copy (v0)
 
@@ -80,15 +103,39 @@ Static coming-soon landing page (`index.html`), deployed via Vercel.
 
 > Join the mailing list — Be first to know when our shop opens.
 
-### Pending (v0)
+## Backend — Supabase
 
-- [ ] Connect mailing list form to an email provider
+- **Project:** [hklvpjnfusupxtnltrds](https://supabase.com/dashboard/project/hklvpjnfusupxtnltrds)
+- **URL:** `https://hklvpjnfusupxtnltrds.supabase.co`
+
+### Schema
+
+**`mailing_list_subscribers`**
+
+| Column       | Type        | Notes                    |
+| ------------ | ----------- | ------------------------ |
+| `id`         | `uuid`      | Primary key              |
+| `email`      | `text`      | Unique, required         |
+| `created_at` | `timestamptz` | Defaults to `now()`    |
+
+- RLS enabled; writes go through `/api/subscribe` using the service role key
+- Migration: `supabase/migrations/001_mailing_list.sql`
+- Apply future migrations via Supabase MCP `apply_migration` (server: `project-0-com.sakkaf-supabase`)
+
+### Environment variables
+
+| Variable                    | Where        | Purpose                          |
+| --------------------------- | ------------ | -------------------------------- |
+| `SUPABASE_URL`              | Vercel, `.env` | Supabase project URL           |
+| `SUPABASE_SERVICE_ROLE_KEY` | Vercel, `.env` | Server-side mailing list writes |
+| `SUPABASE_ANON_KEY`         | `.env` only  | Optional, for future client use  |
 
 ## Site — planned features
 
 ### Phase 1 — Launch
 
-- [ ] **Mailing list backend** — Store signups and send notifications when the shop opens
+- [x] **Mailing list storage** — Signups saved to Supabase
+- [ ] **Mailing list notifications** — Email subscribers when the shop opens
 - [ ] **Our story** — Company heritage, sourcing philosophy, and values
 - [ ] **Coffee growers** — Partner farms and origins behind single origin coffees
 
@@ -118,6 +165,6 @@ Static coming-soon landing page (`index.html`), deployed via Vercel.
 
 ## Open questions
 
-- Email provider for mailing list (Mailchimp, Resend, etc.)
+- Email provider for shop-launch notifications (Resend, Mailchimp, etc.)
 - Product photography and copy for launch catalog
 - Shipping regions and fulfillment partner

@@ -1,0 +1,18 @@
+---
+description: Use Supabase MCP for migrations, not Supabase CLI
+globs:
+  - "**/supabase/migrations/**"
+  - "**/*.sql"
+alwaysApply: true
+---
+
+# Supabase Migrations
+
+When pushing or applying database migrations to Supabase:
+
+1. **Use Supabase MCP** – Call the `apply_migration` tool from the Supabase MCP server
+2. **Do NOT use Supabase CLI** – Do not run `npx supabase db push`, `supabase link`, or any `supabase` CLI commands
+3. **Migration content** – Read the SQL from `supabase/migrations/*.sql` and pass it to `apply_migration`
+4. **Order** – Apply migrations in filename order (`001_mailing_list.sql` before later files)
+
+The project has Supabase MCP configured in `.cursor/mcp.json` with `project_ref` `hklvpjnfusupxtnltrds`.

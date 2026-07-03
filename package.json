@@ -1,0 +1,7 @@
+{
+  "name": "com.sakkaf",
+  "private": true,
+  "dependencies": {
+    "@supabase/supabase-js": "^2.49.1"
+  }
+}
